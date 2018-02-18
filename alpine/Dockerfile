@@ -32,10 +32,7 @@ RUN apk add --update --no-cache ffmpeg python pkgconfig cairo-dev make g++ jpeg-
 # To-DO: Alpine ffmpeg is missing configuration "--enable-libfreetype"
 
 # Clone the Shinobi CCTV PRO repo
-RUN mkdir master_temp
-RUN git clone https://github.com/ShinobiCCTV/Shinobi.git master_temp
-RUN cp -R -f master_temp/* .
-RUN rm -rf $distro master_temp
+RUN git clone https://github.com/ShinobiCCTV/Shinobi.git /opt/shinobi/.
 
 # Install NodeJS dependencies
 RUN npm install pm2 -g

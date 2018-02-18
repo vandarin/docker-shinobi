@@ -33,10 +33,7 @@ RUN echo "deb http://ftp.debian.org/debian jessie-backports main" >> /etc/apt/so
     && apt-get install -y ffmpeg python pkg-config libcairo-dev make g++ libjpeg-dev git sqlite3 libsqlite3-dev
 
 # Clone the Shinobi CCTV PRO repo
-RUN mkdir master_temp
-RUN git clone https://github.com/ShinobiCCTV/Shinobi.git master_temp
-RUN cp -R -f master_temp/* .
-RUN rm -rf $distro master_temp
+RUN git clone https://github.com/ShinobiCCTV/Shinobi.git /opt/shinobi/.
 
 # Install NodeJS dependencies
 RUN npm install pm2 -g
