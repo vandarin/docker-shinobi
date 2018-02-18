@@ -30,7 +30,7 @@ WORKDIR /opt/shinobi
 # Install package dependencies
 RUN echo "deb http://ftp.debian.org/debian jessie-backports main" >> /etc/apt/sources.list \
     && apt-get update \
-    && apt-get install -y ffmpeg python pkg-config libcairo-dev make g++ libjpeg-dev git sqlite3
+    && apt-get install -y ffmpeg python pkg-config libcairo-dev make g++ libjpeg-dev git sqlite3 libsqlite3-dev
 
 # Clone the Shinobi CCTV PRO repo
 RUN mkdir master_temp
@@ -42,7 +42,7 @@ RUN rm -rf $distro master_temp
 RUN npm install pm2 -g
 
 RUN npm install && \
-    npm install canvas@1.6 moment --unsafe-perm
+    npm install canvas moment --unsafe-perm
 
 # Copy code
 COPY docker-entrypoint.sh .
