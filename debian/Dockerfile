@@ -50,9 +50,9 @@ COPY pm2Shinobi.yml .
 RUN chmod -f +x ./*.sh
 
 # Copy default configuration files
-COPY ./config/conf.sample.json /opt/shinobi/conf.sample.json
-COPY ./config/super.sample.json /opt/shinobi/super.sample.json
-COPY ./config/motion.conf.sample.json /opt/shinobi/plugins/motion/conf.sample.json
+COPY config/conf.sample.json /opt/shinobi/conf.sample.json
+COPY config/super.sample.json /opt/shinobi/super.sample.json
+COPY config/motion.conf.sample.json /opt/shinobi/plugins/motion/conf.sample.json
 
 VOLUME ["/opt/shinobi/videos"]
 VOLUME ["/config"]
