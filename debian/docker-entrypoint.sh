@@ -1,11 +1,6 @@
 #!/bin/sh
 set -e
 
-echo "Copy custom configuration files ..."
-if [ -d /config ]; then
-    cp -R -f "/config/"* /opt/shinobi || echo "No custom config files found." 
-fi
-
 if [ ! -f /opt/shinobi/conf.json ]; then
     echo "Create default config file /opt/shinobi/conf.json ..."
     cp /opt/shinobi/conf.sample.json /opt/shinobi/conf.json
