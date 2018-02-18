@@ -21,16 +21,23 @@ if [ ! -f /opt/shinobi/plugins/motion/conf.json ]; then
     cp /opt/shinobi/plugins/motion/conf.sample.json /opt/shinobi/plugins/motion/conf.json
 fi
 
+if [ ! -e "./shinobi.sqlite" ]; then
+    cp /opt/shinobi/sql/shinobi.sample.sqlite /opt/shinobi/shinobi.sqlite
+fi
+
 echo "Hash admin password ..."
 ADMIN_PASSWORD_MD5=$(echo -n "${ADMIN_PASSWORD}" | md5sum | sed -e 's/  -$//')
 
 # set config data from variables
-echo "Set MySQL configuration from environment variables ..."
-sed -i -e 's/"user": "majesticflame"/"user": "'"${MYSQL_USER}"'"/g' \
-       -e 's/"password": ""/"password": "'"${MYSQL_PASSWORD}"'"/g' \
-       -e 's/"host": "127.0.0.1"/"host": "'"${MYSQL_HOST}"'"/g' \
-       -e 's/"database": "ccio"/"database": "'"${MYSQL_DATABASE}"'"/g' \
-       "/opt/shinobi/conf.json"
+echo "Set to SQLlite3"
+node /opt/shinobi/tools/modifyConfiguration.js databaseType=sqlite3
+
+#echo "Set MySQL configuration from environment variables ..."
+#sed -i -e 's/"user": "majesticflame"/"user": "'"${MYSQL_USER}"'"/g' \
+#       -e 's/"password": ""/"password": "'"${MYSQL_PASSWORD}"'"/g' \
+#       -e 's/"host": "127.0.0.1"/"host": "'"${MYSQL_HOST}"'"/g' \
+#       -e 's/"database": "ccio"/"database": "'"${MYSQL_DATABASE}"'"/g' \
+#       "/opt/shinobi/conf.json"echo "Set MySQL configuration from environment variables ..."
 
 echo "Set keys for CRON and PLUGINS from environment variables ..."
 sed -i -e 's/"key":"73ffd716-16ab-40f4-8c2e-aecbd3bc1d30"/"key":"'"${CRON_KEY}"'"/g' \

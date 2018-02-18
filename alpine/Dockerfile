@@ -28,7 +28,7 @@ RUN mkdir -p /opt/shinobi
 WORKDIR /opt/shinobi
 
 # Install package dependencies
-RUN apk add --update --no-cache ffmpeg python pkgconfig cairo-dev make g++ jpeg-dev git ttf-freefont
+RUN apk add --update --no-cache ffmpeg python pkgconfig cairo-dev make g++ jpeg-dev git ttf-freefont sqlite socat
 # To-DO: Alpine ffmpeg is missing configuration "--enable-libfreetype"
 
 # Clone the Shinobi CCTV PRO repo
@@ -41,7 +41,7 @@ RUN rm -rf $distro master_temp
 RUN npm install pm2 -g
 
 RUN npm install && \
-    npm install canvas moment --unsafe-perm
+    npm install canvas@1.6 moment --unsafe-perm
 
 # Copy code
 COPY docker-entrypoint.sh .
