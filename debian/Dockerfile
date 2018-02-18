@@ -11,7 +11,7 @@ ENV MYSQL_USER=majesticflame \
     MYSQL_HOST=127.0.0.1 \
     MYSQL_DATABASE=ccio \
     ADMIN_USER=admin@shinobi.video \
-    ADMIN_PASSWORD=administrator \
+    ADMIN_PASSWORD=admin \
     CRON_KEY=b59b5c62-57d0-4cd1-b068-a55e5222786f \
     PLUGINKEY_MOTION=49ad732d-1a4f-4931-8ab8-d74ff56dac57 \
     PLUGINKEY_OPENCV=6aa3487d-c613-457e-bba2-1deca10b7f5d \
@@ -31,6 +31,7 @@ WORKDIR /opt/shinobi
 RUN echo "deb http://ftp.debian.org/debian jessie-backports main" >> /etc/apt/sources.list \
     && apt-get update \
     && apt-get install -y ffmpeg python pkg-config libcairo-dev make g++ libjpeg-dev git
+    && apt-get install -y sqlite3 libsqlite3-dev -y
 
 # Clone the Shinobi CCTV PRO repo
 RUN mkdir master_temp
@@ -42,7 +43,7 @@ RUN rm -rf $distro master_temp
 RUN npm install pm2 -g
 
 RUN npm install && \
-    npm install canvas moment --unsafe-perm
+    npm install canvas@1.6 moment --unsafe-perm
 
 # Copy code
 COPY docker-entrypoint.sh .
