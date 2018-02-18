@@ -16,23 +16,21 @@ if [ ! -f /opt/shinobi/plugins/motion/conf.json ]; then
     cp /opt/shinobi/plugins/motion/conf.sample.json /opt/shinobi/plugins/motion/conf.json
 fi
 
-if [ ! -e "./shinobi.sqlite" ]; then
-    cp /opt/shinobi/sql/shinobi.sample.sqlite /opt/shinobi/shinobi.sqlite
-fi
-
-echo "Hash admin password ..."
-ADMIN_PASSWORD_MD5=$(echo -n "${ADMIN_PASSWORD}" | md5sum | sed -e 's/  -$//')
-
 # set config data from variables
-echo "Set to SQLlite3"
-node /opt/shinobi/tools/modifyConfiguration.js databaseType=sqlite3
-
-#echo "Set MySQL configuration from environment variables ..."
-#sed -i -e 's/"user": "majesticflame"/"user": "'"${MYSQL_USER}"'"/g' \
-#       -e 's/"password": ""/"password": "'"${MYSQL_PASSWORD}"'"/g' \
-#       -e 's/"host": "127.0.0.1"/"host": "'"${MYSQL_HOST}"'"/g' \
-#       -e 's/"database": "ccio"/"database": "'"${MYSQL_DATABASE}"'"/g' \
-#       "/opt/shinobi/conf.json"
+if [ ! -e /opt/shinobi/sql/shinobi.sample.sqlite ]; then
+    echo "Set to SQLlite3"
+    node /opt/shinobi/tools/modifyConfiguration.js databaseType=sqlite3
+    if [ ! -e /opt/shinobi/shinobi.sqlite ]; then
+        cp /opt/shinobi/sql/shinobi.sample.sqlite /opt/shinobi/shinobi.sqlite
+    fi
+else
+    echo "Set MySQL configuration from environment variables ..."
+    sed -i -e 's/"user": "majesticflame"/"user": "'"${MYSQL_USER}"'"/g' \
+           -e 's/"password": ""/"password": "'"${MYSQL_PASSWORD}"'"/g' \
+           -e 's/"host": "127.0.0.1"/"host": "'"${MYSQL_HOST}"'"/g' \
+           -e 's/"database": "ccio"/"database": "'"${MYSQL_DATABASE}"'"/g' \
+           "/opt/shinobi/conf.json"
+fi
 
 echo "Set keys for CRON and PLUGINS from environment variables ..."
 sed -i -e 's/"key":"73ffd716-16ab-40f4-8c2e-aecbd3bc1d30"/"key":"'"${CRON_KEY}"'"/g' \
@@ -48,6 +46,7 @@ sed -i -e 's/"host":"localhost"/"host":"'"${MOTION_HOST}"'"/g' \
        "/opt/shinobi/plugins/motion/conf.json"
 
 # Set the admin password
+ADMIN_PASSWORD_MD5=$(echo -n "${ADMIN_PASSWORD}" | md5sum | sed -e 's/  -$//')
 echo "Set the super admin ..."
 sed -i -e 's/"mail":"admin@shinobi.video"/"mail":"'"${ADMIN_USER}"'"/g' \
        -e "s/21232f297a57a5a743894a0e4a801fc3/${ADMIN_PASSWORD_MD5}/g" \
