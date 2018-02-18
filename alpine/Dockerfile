@@ -4,6 +4,7 @@
 FROM node:8-alpine 
 
 LABEL Author="MiGoller"
+#and Moe :D
 
 # Set environment variables to default values
 ENV MYSQL_USER=majesticflame \
