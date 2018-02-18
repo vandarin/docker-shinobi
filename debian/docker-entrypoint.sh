@@ -17,7 +17,7 @@ if [ ! -f /opt/shinobi/plugins/motion/conf.json ]; then
 fi
 
 # set config data from variables
-if [ ! -e /opt/shinobi/sql/shinobi.sample.sqlite ]; then
+if [ -e /opt/shinobi/sql/shinobi.sample.sqlite ]; then
     echo "Set to SQLlite3"
     node /opt/shinobi/tools/modifyConfiguration.js databaseType=sqlite3
     if [ ! -e /opt/shinobi/shinobi.sqlite ]; then
