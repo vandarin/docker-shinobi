@@ -1,5 +1,8 @@
 FROM mhart/alpine-node:8
 
+COPY docker-entrypoint.sh /opt/shinobi/docker-entrypoint.sh
+RUN chmod -f +x /opt/shinobi/docker-entrypoint.sh
+
 WORKDIR /opt/shinobi
 
 # Install package dependencies
@@ -14,9 +17,6 @@ RUN npm install pm2 -g
 RUN npm install && \
     npm install canvas moment --unsafe-perm
     
-COPY docker-entrypoint.sh /opt/shinobi/docker-entrypoint.sh
-RUN chmod -f +x /opt/shinobi/docker-entrypoint.sh
-
 VOLUME ["/opt/shinobi/videos"]
 
 EXPOSE 8080
