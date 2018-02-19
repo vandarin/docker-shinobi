@@ -14,8 +14,8 @@ RUN npm install pm2 -g
 RUN npm install && \
     npm install canvas moment --unsafe-perm
     
-COPY docker-entrypoint.sh .
-RUN chmod -f +x ./docker-entrypoint.sh
+COPY docker-entrypoint.sh /opt/shinobi/docker-entrypoint.sh
+RUN chmod -f +x /opt/shinobi/docker-entrypoint.sh
 
 VOLUME ["/opt/shinobi/videos"]
 
