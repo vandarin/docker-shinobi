@@ -7,10 +7,11 @@ RUN apk add --update --no-cache ffmpeg python pkgconfig cairo-dev make g++ jpeg-
 
 # Clone the Shinobi CCTV PRO repo
 RUN git clone -b dev https://github.com/ShinobiCCTV/Shinobi.git /opt/shinobi/.
-RUN git clone https://github.com/moeiscool/docker-shinobi.git /opt/shinobi/tempDockerFiles
 
-RUN mv /opt/shinobi/tempDockerFiles/alpine/docker-entrypoint.sh /opt/shinobi/docker-entrypoint.sh
-RUN chmod -f +x /opt/shinobi/docker-entrypoint.sh
+#create entrypoint file
+RUN git clone https://github.com/moeiscool/docker-shinobi.git /opt/shinobi/tempDockerFiles
+COPY /opt/shinobi/tempDockerFiles/alpine/docker-entrypoint.sh /opt/shinobi/docker-entrypoint.sh
+RUN chmod +x /opt/shinobi/docker-entrypoint.sh
 RUN rm -rf /opt/shinobi/tempDockerFiles
 
 # Install NodeJS dependencies
