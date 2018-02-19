@@ -3,7 +3,6 @@ set -e
 
 cp /opt/shinobi/conf.sample.json /opt/shinobi/conf.json
 cp /opt/shinobi/super.sample.json /opt/shinobi/super.json
-cp /opt/shinobi/plugins/motion/conf.sample.json /opt/shinobi/plugins/motion/conf.json
 
 ADMIN_PASSWORD_MD5=$(echo -n "${ADMIN_PASSWORD}" | md5sum | sed -e 's/  -$//')
 
