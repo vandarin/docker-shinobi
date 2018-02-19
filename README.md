@@ -12,7 +12,7 @@ Find MiGoller's original image here : https://hub.docker.com/r/migoller/shinobi/
 
 1. Clone the Repo and enter the directory.
     ```
-    git clone https://github.com/moeiscool/docker-shinobi.git docker-shinobi && cd docker-shinobi
+    git clone https://github.com/moeiscool/docker-shinobi.git docker-shinobi && cd docker-shinobi/alpine
     ```
 
 2. Run docker.
