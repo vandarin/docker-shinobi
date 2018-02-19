@@ -10,6 +10,7 @@ RUN git clone -b dev https://github.com/ShinobiCCTV/Shinobi.git /opt/shinobi/.
 
 #create entrypoint file
 RUN wget https://raw.githubusercontent.com/moeiscool/docker-shinobi/master/alpine/docker-entrypoint.sh -O /opt/shinobi/docker-entrypoint.sh
+RUN chmod +x /opt/shinobi/docker-entrypoint.sh
 
 # Install NodeJS dependencies
 RUN npm install pm2 -g
