@@ -1,7 +1,27 @@
 # Shinobi CCTV on Docker
 
-This set of images was made by MiGoller. Thanks to him this fork has become the official Docker image. Shinobi is now supporting Docker due to his valiant efforts.
+This image was inspired by MiGoller. Since forking mrproper's previous image has been merged to make an ultimate docker image with `docker-compose`
 
-I hope I speak for everyone when i say thank you MiGoller!
+Due to MiGoller's valiant efforts Shinobi now supports Docker. I hope I speak for everyone when I say thank you MiGoller!
 
 Find MiGoller's original image here : https://hub.docker.com/r/migoller/shinobi/
+
+### How to Dock Shinobi
+
+>  `docker-compose` should already be installed.
+
+1. Clone the Repo and enter the directory.
+    ```
+    git clone https://github.com/moeiscool/docker-shinobi.git docker-shinobi && cd docker-shinobi
+    ```
+
+2. Run docker.
+    ```
+    docker-compose up -d --build
+    ```
+    
+3. Open your computer's IP address in your web browser on port `8080`.
+    ```
+    http://xxx.xxx.xxx.xxx:8080/
+    ```    
+4. Enjoy!
