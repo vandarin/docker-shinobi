@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 set -e
 
 cp /opt/shinobi/conf.sample.json /opt/shinobi/conf.json
@@ -12,8 +12,9 @@ fi
 node /opt/shinobi/tools/modifyConfiguration.js databaseType=sqlite3 db='{"filename":"/opt/dbdata/shinobi.sqlite"}'
 
 ADMIN_PASSWORD_MD5=$(echo -n "${ADMIN_PASSWORD}" | md5sum | sed -e 's/  -$//')
-#
-## Set the admin password
+
+#set config data from variables
+# Set the admin password
 #sed -i -e "s/21232f297a57a5a743894a0e4a801fc3/${ADMIN_PASSWORD_MD5}/" "/opt/shinobi/super.json"
 
 # Execute Command
