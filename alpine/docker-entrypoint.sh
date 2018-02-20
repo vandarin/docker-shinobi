@@ -9,7 +9,7 @@ if [ ! -e "/opt/dbdata/shinobi.sqlite" ]; then
     cp /opt/shinobi/sql/shinobi.sample.sqlite /opt/dbdata/shinobi.sqlite
 fi
 
-node /opt/shinobi/tools/modifyConfiguration.js databaseType=sqlite3 db='{"filename":"/opt/dbdata/shinobi.sqlite"}'
+node /opt/shinobi/tools/modifyConfiguration.js databaseType=sqlite3 db='{"filename":"/opt/dbdata/shinobi.sqlite"}' cpuUsageMarker=CPU
 
 ADMIN_PASSWORD_MD5=$(echo -n "${ADMIN_PASSWORD}" | md5sum | sed -e 's/  -$//')
 
