@@ -14,7 +14,8 @@ RUN chmod -f +x ./*.sh
 
 # Install NodeJS dependencies
 RUN npm install
-    
+RUN npm install sqlite3
+
 VOLUME ["/opt/shinobi/videos"]
 
 EXPOSE 8080

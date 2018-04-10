@@ -41,7 +41,7 @@ RUN npm install pm2 -g
 
 RUN npm install && \
     npm install canvas moment --unsafe-perm
-
+RUN npm install sqlite3
 # Copy code
 COPY docker-entrypoint.sh .
 COPY pm2Shinobi.yml .
