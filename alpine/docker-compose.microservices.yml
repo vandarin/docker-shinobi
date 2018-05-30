@@ -6,7 +6,7 @@ services:
       - MySQL.env
     volumes:
       - ./datadir:/var/lib/mysql
-  web:
+  camera:
     build: .
     env_file:
       - MySQL.env
@@ -20,3 +20,17 @@ services:
       - db
     ports:
       - "8080:8080"
+    command: node /opt/shinobi/camera.js
+  cron:
+    build: .
+    env_file:
+      - MySQL.env
+      - Shinobi.env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - ./config:/config
+      - ./videos:/opt/shinobi/videos
+    depends_on:
+      - db
+    command: node /opt/shinobi/cron.js
