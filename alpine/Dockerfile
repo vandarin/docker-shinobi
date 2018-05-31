@@ -6,12 +6,18 @@ FROM node:8-alpine
 LABEL Author="MiGoller, mrproper, pschmitt & moeiscool"
 
 # Set environment variables to default values
+# ADMIN_USER : the super user login name
+# ADMIN_PASSWORD : the super user login password
+# PLUGINKEY_MOTION : motion plugin connection key
+# PLUGINKEY_OPENCV : opencv plugin connection key
+# PLUGINKEY_OPENALPR : openalpr plugin connection key
 ENV ADMIN_USER=admin@shinobi.video \
     ADMIN_PASSWORD=admin \
     CRON_KEY=fd6c7849-904d-47ea-922b-5143358ba0de \
     PLUGINKEY_MOTION=b7502fd9-506c-4dda-9b56-8e699a6bc41c \
     PLUGINKEY_OPENCV=f078bcfe-c39a-4eb5-bd52-9382ca828e8a \
     PLUGINKEY_OPENALPR=dbff574e-9d4a-44c1-b578-3dc0f1944a3c \
+    #leave these ENVs alone unless you know what you are doing
     MYSQL_USER=majesticflame \
     MYSQL_PASSWORD=password \
     MYSQL_HOST=localhost \
@@ -33,7 +39,7 @@ RUN sed -ie "s/^bind-address\s*=\s*127\.0\.0\.1$/#bind-address = 0.0.0.0/" /etc/
 
 # To-DO: Alpine ffmpeg is missing configuration "--enable-libfreetype"
 
-# Install ffmpeg static build version
+# Install ffmpeg static build version from cdn.shinobi.video
 RUN wget https://cdn.shinobi.video/installers/ffmpeg-release-64bit-static.tar.xz
 
 RUN tar xpvf ./ffmpeg-release-64bit-static.tar.xz -C ./ \
@@ -49,7 +55,7 @@ WORKDIR /opt/shinobi
 RUN git clone https://github.com/ShinobiCCTV/Shinobi.git /opt/shinobi
 
 # Install NodeJS dependencies
-#RUN npm install npm -g
+RUN npm install npm -g
 
 RUN npm install pm2 -g
 

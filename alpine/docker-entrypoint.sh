@@ -101,6 +101,9 @@ if [ -n "${GID}" ]; then
     fi
 fi
 
+cd /opt/shinobi
+node tools/modifyConfiguration.js cpuUsageMarker=CPU
+
 # Execute Command
 echo "Starting Shinobi ..."
 exec "$@"
