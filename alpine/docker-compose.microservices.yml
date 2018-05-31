@@ -1,11 +1,5 @@
 version: '2'
 services:
-  db:
-    image: mysql
-    env_file:
-      - MySQL.env
-    volumes:
-      - ./datadir:/var/lib/mysql
   camera:
     build: .
     env_file:
@@ -16,8 +10,6 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - ./config:/config
       - ./videos:/opt/shinobi/videos
-    depends_on:
-      - db
     ports:
       - "8080:8080"
     command: node /opt/shinobi/camera.js
@@ -31,6 +23,4 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - ./config:/config
       - ./videos:/opt/shinobi/videos
-    depends_on:
-      - db
     command: node /opt/shinobi/cron.js
