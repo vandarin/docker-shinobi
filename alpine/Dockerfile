@@ -34,10 +34,35 @@ RUN mkdir -p /opt/shinobi
 
 
 # Install package dependencies
-RUN apk add --update --no-cache ffmpeg pkgconfig git mariadb mariadb-client wget tar xz openrc
-RUN sed -ie "s/^bind-address\s*=\s*127\.0\.0\.1$/#bind-address = 0.0.0.0/" /etc/mysql/my.cnf
+RUN apk update && \
+apk upgrade && \
+apk --no-cache add   freetype-dev \ 
+  gnutls-dev \ 
+  lame-dev \ 
+  libass-dev \ 
+  libogg-dev \ 
+  libtheora-dev \ 
+  libvorbis-dev \ 
+  libvpx-dev \ 
+  libwebp-dev \ 
+  libssh2 \ 
+  opus-dev \ 
+  rtmpdump-dev \ 
+  x264-dev \ 
+  x265-dev \ 
+  yasm-dev && \
+apk add --no-cache   --virtual \ 
+  .build-dependencies \ 
+  build-base \ 
+  bzip2 \ 
+  coreutils \ 
+  gnutls \ 
+  nasm \ 
+  tar \ 
+  x264
 
-# To-DO: Alpine ffmpeg is missing configuration "--enable-libfreetype"
+RUN apk add --update --no-cache python make ffmpeg pkgconfig git mariadb mariadb-client wget tar xz openrc
+RUN sed -ie "s/^bind-address\s*=\s*127\.0\.0\.1$/#bind-address = 0.0.0.0/" /etc/mysql/my.cnf
 
 # Install ffmpeg static build version from cdn.shinobi.video
 RUN wget https://cdn.shinobi.video/installers/ffmpeg-release-64bit-static.tar.xz
@@ -55,7 +80,7 @@ WORKDIR /opt/shinobi
 RUN git clone https://github.com/ShinobiCCTV/Shinobi.git /opt/shinobi
 
 # Install NodeJS dependencies
-RUN npm install npm -g
+RUN npm i npm@latest -g
 
 RUN npm install pm2 -g
 

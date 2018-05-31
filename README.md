@@ -17,7 +17,7 @@ Find MiGoller's original image here : https://hub.docker.com/r/migoller/shinobi/
 
 2. Spark one up.
     ```
-    docker-compose up -d --build
+    sh start-image.sh
     ```
     
 3. Open your computer's IP address in your web browser on port `8080`. Open the superuser panel to create an account.
