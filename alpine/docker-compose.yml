@@ -1,6 +1,6 @@
 version: '2'
 services:
-  web:
+  shinobi:
     build: .
     volumes:
       - /etc/localtime:/etc/localtime:ro
