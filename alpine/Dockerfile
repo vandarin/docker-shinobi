@@ -3,7 +3,7 @@
 #
 FROM node:8-alpine 
 
-LABEL Author="MiGoller & Moe"
+LABEL Author="MiGoller, mrproper, pschmitt & moeiscool"
 
 # Set environment variables to default values
 ENV ADMIN_USER=admin@shinobi.video \
