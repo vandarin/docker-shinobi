@@ -1,11 +1,5 @@
 version: '2'
 services:
-  db:
-    image: mysql
-    env_file:
-      - MySQL.env
-    volumes:
-      - ./datadir:/var/lib/mysql
   web:
     build: .
     env_file:
@@ -16,7 +10,6 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - ./config:/config
       - ./videos:/opt/shinobi/videos
-    depends_on:
-      - db
+      - ./datadir:/var/lib/mysql
     ports:
       - "8080:8080"
