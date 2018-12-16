@@ -1,0 +1,11 @@
+stages:
+- name: Publish
+  steps:
+  - publishImageConfig:
+      dockerfilePath: ./alpine/Dockerfile
+      buildContext: ./alpine/
+      tag: vandarin/shinobi:${CICD_EXECUTION_SEQUENCE}
+- name: Deploy
+  steps:
+  - applyYamlConfig:
+      path: ./deployment.yaml
